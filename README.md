@@ -17,13 +17,13 @@
 ## การติดตั้งแพ็กเกจใน `Project`
 หากต้องการติดตั้งแพ็กเกจเฉพาะใน `apps/client`:
 
-npm install <package-name> --workspace=apps/client
+npm install `<package-name>` --workspace=apps/client
 
 
 ## การติดตั้งแพ็กเกจใน `apps/service`
 หากต้องการติดตั้งแพ็กเกจเฉพาะใน `apps/service`:
 
-npm install <package-name> --workspace=apps/service
+npm install `<package-name>` --workspace=apps/service
 
 ## การติดตั้ง แพ็ก ทั้ง client และ service
-npm install <package-name> -w
+npm install `<package-name>` -w
