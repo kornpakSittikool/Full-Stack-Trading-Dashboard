@@ -1,0 +1,16 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "all",
+  "endOfLine": "lf",
+  "_comments": {
+    "semi": "บังคับให้ใช้ semicolon (;) ที่ท้ายคำสั่ง",
+    "singleQuote": "ใช้ single quote (') แทน double quote (\")",
+    "tabWidth": "กำหนดความกว้างของ tab ให้เป็น 2 space",
+    "useTabs": "ใช้ space แทน tab สำหรับการจัดโค้ด",
+    "trailingComma": "ใส่ comma (,) ท้ายรายการ object หรือ array เสมอ",
+    "endOfLine": "ใช้ line feed (LF) เป็นตัวจบบรรทัด"
+  }
+}
