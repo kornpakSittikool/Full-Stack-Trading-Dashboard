@@ -1,0 +1,21 @@
+rules:
+  - id: detect-eval-usage
+    patterns:
+      - pattern: eval($CODE)
+    message: "Avoid using eval as it can lead to security vulnerabilities."
+    languages: [javascript, typescript]
+    severity: ERROR
+
+  - id: detect-sensitive-logging
+    patterns:
+      - pattern: console.log($DATA)
+    message: "Sensitive data should not be logged directly."
+    languages: [javascript, typescript]
+    severity: WARNING
+
+  - id: detect-sql-injection
+    patterns:
+      - pattern: SELECT * FROM users WHERE username = $X
+    message: "Potential SQL Injection vulnerability."
+    languages: [javascript, typescript]
+    severity: ERROR
