@@ -6,9 +6,16 @@ rules:
     languages: [javascript, typescript]
     severity: ERROR
 
+  - id: detect-function-usage
+    patterns:
+      - pattern: new Function($CODE)
+    message: "Avoid using new Function as it can lead to security vulnerabilities."
+    languages: [javascript, typescript]
+    severity: ERROR
+
   - id: detect-sensitive-logging
     patterns:
       - pattern: console.log($DATA)
     message: "Sensitive data should not be logged directly."
     languages: [javascript, typescript]
-    severity: WARNING
+    severity: ERROR

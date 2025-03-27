@@ -23,5 +23,5 @@ jobs:
       image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
-    - run: semgrep --config=semgrep-rules.yml --verbose
-    - run: semgrep --config=p/javascript --config=p/typescript --exclude=.git --verbose
+    - run: semgrep --config=semgrep-rules.yml
+    - run: semgrep --config=p/javascript --config=p/typescript --exclude=.git
