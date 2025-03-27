@@ -12,10 +12,3 @@ rules:
     message: "Sensitive data should not be logged directly."
     languages: [javascript, typescript]
     severity: WARNING
-
-  - id: detect-sql-injection
-    patterns:
-      - pattern: SELECT * FROM users WHERE username = $X
-    message: "Potential SQL Injection vulnerability."
-    languages: [javascript, typescript]
-    severity: ERROR
