@@ -3,14 +3,15 @@ on:
   pull_request: {}
   push:
     branches:
-    - main
-    - master
+      - main
     paths:
-    - .github/workflows/semgrep.yml
+      - .github/workflows/semgrep.yml
   schedule:
-  # random HH:MM to avoid a load spike on GitHub Actions at 00:00
-  - cron: 36 8 * * *
+    # random HH:MM to avoid a load spike on GitHub Actions at 00:00
+    - cron: 36 8 * * *
+
 name: Semgrep
+
 jobs:
   semgrep:
     name: semgrep/ci
@@ -21,7 +22,23 @@ jobs:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: semgrep/semgrep
+
     steps:
-    - uses: actions/checkout@v4
-    - run: semgrep --config=semgrep-rules.yml
-    - run: semgrep --config=p/javascript --config=p/typescript --exclude=.git
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep scan
+        id: semgrep
+        run: |
+          semgrep --config=semgrep-rules.yml --sarif-file=semgrep-results.sarif || exit 1
+          
+      - name: Upload SARIF results to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: semgrep-results.sarif
+
+      - name: Fail the pipeline if Semgrep found issues
+        if: ${{ failure() }}
+        run: |
+          echo "Semgrep found issues, failing the pipeline."
+          exit 1
