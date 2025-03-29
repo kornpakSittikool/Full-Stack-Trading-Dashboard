@@ -1,35 +1,51 @@
 rules:
   - id: detect-eval-usage
     patterns:
-      - pattern: eval($CODE)
-    message: "Avoid using eval as it can lead to security vulnerabilities."
-    languages: [javascript, typescript]
+      - pattern: eval($X)
+    message: "Avoid using eval() as it may introduce security vulnerabilities."
     severity: ERROR
+    languages: [javascript]
 
   - id: detect-function-usage
     patterns:
-      - pattern: new Function($CODE)
-    message: "Avoid using new Function as it can lead to security vulnerabilities."
-    languages: [javascript, typescript]
-    severity: ERROR
-
-  - id: detect-sensitive-logging
-    patterns:
-      - pattern: console.log($DATA)
-    message: "Sensitive data should not be logged directly."
-    languages: [javascript, typescript]
-    severity: ERROR
-
-  - id: detect-insecure-endpoint
-    patterns:
-      - pattern: "@Get('admin')"
-    message: "Ensure that sensitive endpoints have proper authentication and authorization."
-    languages: [typescript]
+      - pattern: someUnsafeFunction($X)
+    message: "Detected the use of a potentially unsafe function. Check if this function poses any security risks."
     severity: WARNING
+    languages: [javascript]
 
   - id: detect-hardcoded-secret
     patterns:
-      - pattern: "process.env['SECRET_KEY'] = '...';"
-    message: "Avoid hardcoding secrets. Use environment variables or secret management tools."
-    languages: [typescript]
+      - pattern: $KEY = "$SECRET"
+      - pattern-inside: |
+          const $KEY = "$SECRET"
+    message: "Detected hardcoded secrets (such as API keys or passwords) in the code."
     severity: ERROR
+    languages: [javascript]
+
+  - id: detect-insecure-endpoint
+    patterns:
+      - pattern: "http://$X"
+    message: "Detected an insecure endpoint (HTTP). It is recommended to use HTTPS instead."
+    severity: ERROR
+    languages: [javascript]
+
+  - id: detect-sensitive-logging
+    patterns:
+      - pattern: console.log($X)
+    message: "Detected logging of potentially sensitive information. Ensure that the logged data is safe."
+    severity: WARNING
+    languages: [javascript]
+
+  - id: detect-unsafe-regular-expressions
+    patterns:
+      - pattern: /(.+)+/
+    message: "Detected a regular expression that could lead to ReDoS (Regular Expression Denial of Service)."
+    severity: WARNING
+    languages: [javascript]
+
+  - id: detect-unvalidated-input
+    patterns:
+      - pattern: req.body.$INPUT
+    message: "Detected unvalidated user input, which may lead to security vulnerabilities."
+    severity: WARNING
+    languages: [javascript]
