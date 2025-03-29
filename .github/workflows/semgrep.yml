@@ -14,13 +14,14 @@ jobs:
     permissions:
       contents: read
       security-events: write  
+      actions: read
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
-    - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif
+    - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose
     - name: Upload SARIF to GitHub  
       uses: github/codeql-action/upload-sarif@v2
       with:
