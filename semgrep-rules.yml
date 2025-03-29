@@ -4,14 +4,14 @@ rules:
       - pattern: eval($X)
     message: "Avoid using eval() as it may introduce security vulnerabilities."
     severity: ERROR
-    languages: [javascript]
+    languages: [javascript ,typescript]
 
   - id: detect-function-usage
     patterns:
       - pattern: someUnsafeFunction($X)
     message: "Detected the use of a potentially unsafe function. Check if this function poses any security risks."
     severity: WARNING
-    languages: [javascript]
+    languages: [javascript ,typescript]
 
   - id: detect-hardcoded-secret
     patterns:
@@ -20,32 +20,32 @@ rules:
           const $KEY = "$SECRET"
     message: "Detected hardcoded secrets (such as API keys or passwords) in the code."
     severity: ERROR
-    languages: [javascript]
+    languages: [javascript ,typescript]
 
   - id: detect-insecure-endpoint
     patterns:
       - pattern: "http://$X"
     message: "Detected an insecure endpoint (HTTP). It is recommended to use HTTPS instead."
     severity: ERROR
-    languages: [javascript]
+    languages: [javascript ,typescript]
 
   - id: detect-sensitive-logging
     patterns:
       - pattern: console.log($X)
     message: "Detected logging of potentially sensitive information. Ensure that the logged data is safe."
     severity: WARNING
-    languages: [javascript]
+    languages: [javascript ,typescript]
 
   - id: detect-unsafe-regular-expressions
     patterns:
       - pattern: /(.+)+/
     message: "Detected a regular expression that could lead to ReDoS (Regular Expression Denial of Service)."
     severity: WARNING
-    languages: [javascript]
+    languages: [javascript ,typescript]
 
   - id: detect-unvalidated-input
     patterns:
       - pattern: req.body.$INPUT
     message: "Detected unvalidated user input, which may lead to security vulnerabilities."
     severity: WARNING
-    languages: [javascript]
+    languages: [javascript ,typescript]
