@@ -15,14 +15,24 @@ jobs:
       contents: read
       security-events: write  
       actions: read
+      id-token: write
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
-    - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose
+    - run:  semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose
+    - name: List files to check if SARIF exists
+      run: ls -al
+    - name: Check if SARIF file exists
+      run: |
+        if [ ! -f semgrep-results.sarif ]; then
+          echo "semgrep-results.sarif not found!"
+          exit 1
+        fi
     - name: Upload SARIF to GitHub  
       uses: github/codeql-action/upload-sarif@v2
       with:
           sarif_file: semgrep-results.sarif
+          
