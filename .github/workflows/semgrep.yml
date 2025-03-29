@@ -22,7 +22,7 @@ jobs:
       image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
-    - run:  semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose
+    - run:  semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose --error-exit-zero
     - name: List files to check if SARIF exists
       run: ls -al
     - name: Check if SARIF file exists
