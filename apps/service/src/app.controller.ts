@@ -27,4 +27,9 @@ export class AppController {
     const dangerous = new Function('console.log("This could be dangerous!")');
     dangerous(); // This is flagged by eslint @typescript-eslint/no-implied-eval
   }
+
+  @Get('admin')
+  getAdminData(): string {
+    return 'Admin Data';
+  }
 }

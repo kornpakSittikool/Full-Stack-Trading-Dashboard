@@ -4,12 +4,8 @@ on:
   push:
     branches:
     - main
-    - master
     paths:
     - .github/workflows/semgrep.yml
-  schedule:
-  # random HH:MM to avoid a load spike on GitHub Actions at 00:00
-  - cron: 36 8 * * *
 name: Semgrep
 jobs:
   semgrep:
@@ -23,4 +19,4 @@ jobs:
       image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
-    - run: semgrep ci
+    - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif

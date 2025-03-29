@@ -19,3 +19,17 @@ rules:
     message: "Sensitive data should not be logged directly."
     languages: [javascript, typescript]
     severity: ERROR
+
+  - id: detect-insecure-endpoint
+    patterns:
+      - pattern: "@Get('admin')"
+    message: "Ensure that sensitive endpoints have proper authentication and authorization."
+    languages: [typescript]
+    severity: WARNING
+
+  - id: detect-hardcoded-secret
+    patterns:
+      - pattern: "process.env['SECRET_KEY'] = '...';"
+    message: "Avoid hardcoding secrets. Use environment variables or secret management tools."
+    languages: [typescript]
+    severity: ERROR
