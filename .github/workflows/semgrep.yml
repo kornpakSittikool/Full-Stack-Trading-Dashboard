@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      security-events: write  
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
@@ -20,3 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif
+    - name: Upload SARIF to GitHub  
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+          sarif_file: semgrep-results.sarif
