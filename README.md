@@ -27,3 +27,36 @@ npm install `<package-name>` --workspace=apps/service
 
 ## การติดตั้ง แพ็ก ทั้ง client และ service
 npm install `<package-name>` -w
+
+## Code Scan Rules with Semgrep
+
+โปรเจ็กต์นี้ประกอบด้วยชุดกฎ Semgrep ที่ออกแบบมาเพื่อปรับปรุงความปลอดภัย ความสามารถในการบำรุงรักษา และคุณภาพโดยรวมของฐานโค้ด JavaScript/TypeScript ของคุณ กฎแต่ละข้อจะกำหนดเป้าหมายไปที่รูปแบบเฉพาะเพื่อตรวจจับช่องโหว่ที่อาจเกิดขึ้นหรือกลิ่นของโค้ด ภาพรวมกฎ 
+
+**Rules Overview**
+
+-  Detect eval-usage
+
+-  Detect function-usage
+
+-  Detect hardcoded-secret
+
+-  Detect insecure-endpoint
+
+-  Detect sensitive-logging
+
+-  Detect unsafe-regular-expressions
+
+-  Detect-unvalidated-input
+
+-  Detect duplicated functions
+
+-  Detect duplicate-code
+
+-  Detect long-function
+
+-  Detect complex-if-else
+
+-  Detect duplicate-loop
+
+-  Detect hardcoded-value
+
