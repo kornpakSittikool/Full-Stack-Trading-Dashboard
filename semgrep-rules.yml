@@ -1,20 +1,20 @@
 rules:
   - id: detect-eval-usage
-    pattern-either:
-      - pattern: eval($X)
+    pattern:
+      - pattern: eval($CODE)
     message: "Avoid using eval() as it may introduce security vulnerabilities."
     severity: ERROR
     languages: [javascript ,typescript]
 
   - id: detect-function-usage
-    patterns-either:
-      - pattern: someUnsafeFunction($X)
+    patterns:
+      - pattern: someUnsafeFunction($CODE)
     message: "Detected the use of a potentially unsafe function. Check if this function poses any security risks."
     severity: WARNING
     languages: [javascript ,typescript]
   
   - id: detect-hardcoded-secret
-    patterns-either:
+    patterns:
       - pattern: $KEY = "$SECRET"
       - pattern-inside: |
           const $KEY = "$SECRET"
@@ -23,35 +23,35 @@ rules:
     languages: [javascript ,typescript]
   
   - id: detect-insecure-endpoint
-    patterns-either:
+    patterns:
       - pattern: "http://$X"
     message: "Detected an insecure endpoint (HTTP). It is recommended to use HTTPS instead."
     severity: ERROR
     languages: [javascript ,typescript]
   
   - id: detect-sensitive-logging
-    patterns-either:
-      - pattern: console.log($X)
+    patterns:
+      - pattern: console.log($CODE)
     message: "Detected logging of potentially sensitive information. Ensure that the logged data is safe."
     severity: WARNING
     languages: [javascript ,typescript]
   
   - id: detect-unsafe-regular-expressions
-    patterns-either:
+    patterns:
       - pattern: /(.+)+/
     message: "Detected a regular expression that could lead to ReDoS (Regular Expression Denial of Service)."
     severity: WARNING
     languages: [javascript ,typescript]
   
   - id: detect-unvalidated-input
-    patterns-either:
+    patterns:
       - pattern: req.body.$INPUT
     message: "Detected unvalidated user input, which may lead to security vulnerabilities."
     severity: WARNING
     languages: [javascript ,typescript]
   
   - id: duplicate-code
-    pattern-either: |
+    pattern: |
       def $FUNC_NAME($ARGS):
           $BODY
       def $FUNC_NAME($ARGS):
@@ -60,7 +60,7 @@ rules:
     severity: WARNING
   
   - id: long-function
-    pattern-either: |
+    pattern: |
       def $FUNC_NAME($ARGS):
           $BODY
     message: "Function is too long. Consider refactoring."
@@ -69,7 +69,7 @@ rules:
     languages: [javascript, typescript]
   
   - id: complex-if-else
-    pattern-either: |
+    pattern: |
       if $COND1:
           $BODY1
       else:
@@ -82,7 +82,7 @@ rules:
     languages: [javascript, typescript]
   
   - id: duplicate-loop
-    pattern-either: |
+    pattern: |
       for $VAR in $COLLECTION:
           $BODY
       for $VAR in $COLLECTION:
@@ -92,7 +92,7 @@ rules:
     languages: [javascript, typescript]
   
   - id: hardcoded-value
-    pattern-either: |
+    pattern: |
       $VAR = "secret"
     message: "Avoid using hardcoded values in the code."
     severity: ERROR

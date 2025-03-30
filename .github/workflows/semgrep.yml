@@ -9,6 +9,7 @@ on:
     - apps/**
     - client/**
     - service/**
+    - /**
 name: Semgrep
 jobs:
   semgrep:
@@ -24,7 +25,7 @@ jobs:
     container:
       image: semgrep/semgrep
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4 
     - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose || true
     - name: List files to check if SARIF exists
       run: ls -al
