@@ -4,6 +4,11 @@ on:
   push:
     branches:
     - main
+    paths:
+      - .github/workflows/semgrep.yml
+      - apps/**
+      - client/**
+      - service/**
 name: Semgrep
 jobs:
   semgrep:
