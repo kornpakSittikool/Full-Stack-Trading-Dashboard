@@ -1,13 +1,11 @@
 rules:
-  # ตรวจจับการใช้ eval() ซึ่งเป็นฟังก์ชันที่อาจเปิดช่องโหว่ให้กับการโจมตี เช่น code injection
   - id: detect-eval-usage
     patterns:
       - pattern: eval($X)
     message: "Avoid using eval() as it may introduce security vulnerabilities."
     severity: ERROR
     languages: [javascript ,typescript]
-  
-  # ตรวจจับการใช้ฟังก์ชันที่อาจไม่ปลอดภัย เช่น ฟังก์ชันที่อาจมีช่องโหว่ที่ทำให้โค้ดเสี่ยง
+
   - id: detect-function-usage
     patterns:
       - pattern: someUnsafeFunction($X)
@@ -15,7 +13,6 @@ rules:
     severity: WARNING
     languages: [javascript ,typescript]
   
-  # ตรวจจับการกำหนดค่าความลับ (เช่น API keys หรือ passwords) ที่อยู่ในโค้ดโดยตรง ซึ่งไม่ควรทำ
   - id: detect-hardcoded-secret
     patterns:
       - pattern: $KEY = "$SECRET"
@@ -25,7 +22,6 @@ rules:
     severity: ERROR
     languages: [javascript ,typescript]
   
-  # ตรวจจับการใช้ HTTP (ไม่ปลอดภัย) แทน HTTPS ซึ่งควรใช้ HTTPS เพื่อความปลอดภัย
   - id: detect-insecure-endpoint
     patterns:
       - pattern: "http://$X"
@@ -33,7 +29,6 @@ rules:
     severity: ERROR
     languages: [javascript ,typescript]
   
-  # ตรวจจับการ log ข้อมูลที่อาจมีความลับหรือข้อมูลที่ไม่ควรถูกเปิดเผยใน log
   - id: detect-sensitive-logging
     patterns:
       - pattern: console.log($X)
@@ -41,7 +36,6 @@ rules:
     severity: WARNING
     languages: [javascript ,typescript]
   
-  # ตรวจจับการใช้ Regular Expressions ที่อาจทำให้เกิดปัญหา ReDoS (Regular Expression Denial of Service) 
   - id: detect-unsafe-regular-expressions
     patterns:
       - pattern: /(.+)+/
@@ -49,7 +43,6 @@ rules:
     severity: WARNING
     languages: [javascript ,typescript]
   
-  # ตรวจจับการใช้ข้อมูลที่ผู้ใช้ส่งมา (input) โดยไม่มีการตรวจสอบ ซึ่งอาจทำให้เกิดช่องโหว่
   - id: detect-unvalidated-input
     patterns:
       - pattern: req.body.$INPUT
@@ -57,7 +50,6 @@ rules:
     severity: WARNING
     languages: [javascript ,typescript]
   
-  # ตรวจจับการประกาศฟังก์ชันที่ซ้ำซ้อน ซึ่งอาจทำให้โค้ดยากต่อการดูแลรักษา
   - id: duplicate-code
     pattern: |
       def $FUNC_NAME($ARGS):
@@ -67,7 +59,6 @@ rules:
     message: "Duplicated function definition detected."
     severity: WARNING
   
-  # ตรวจจับฟังก์ชันที่ยาวเกินไป ซึ่งอาจทำให้โค้ดยากต่อการอ่านและบำรุงรักษา
   - id: long-function
     pattern: |
       def $FUNC_NAME($ARGS):
@@ -77,7 +68,6 @@ rules:
     max-lines: 20
     languages: [javascript, typescript]
   
-  # ตรวจจับการใช้ if-else ที่ซับซ้อน ซึ่งอาจทำให้โค้ดยากต่อการอ่านและแก้ไข
   - id: complex-if-else
     pattern: |
       if $COND1:
@@ -91,7 +81,6 @@ rules:
     severity: WARNING
     languages: [javascript, typescript]
   
-  # ตรวจจับลูปที่ซ้ำซ้อน ซึ่งอาจทำให้โค้ดยาวเกินไปและซับซ้อน
   - id: duplicate-loop
     pattern: |
       for $VAR in $COLLECTION:
@@ -102,7 +91,6 @@ rules:
     severity: WARNING
     languages: [javascript, typescript]
   
-  # ตรวจจับการใช้ค่าคงที่ที่ระบุในโค้ดโดยตรง (Hardcoded Values) ซึ่งไม่ควรกำหนดในโค้ด
   - id: hardcoded-value
     pattern: |
       $VAR = "secret"

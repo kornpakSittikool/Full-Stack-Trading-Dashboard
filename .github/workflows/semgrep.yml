@@ -6,6 +6,9 @@ on:
     - main
     paths:
     - .github/workflows/semgrep.yml
+    - apps/**
+    - client/**
+    - service/**
 name: Semgrep
 jobs:
   semgrep:
@@ -22,7 +25,7 @@ jobs:
       image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
-    - run: semgrep scan --metrics=off --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose || true
+    - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose || true
     - name: List files to check if SARIF exists
       run: ls -al
     - name: Check if SARIF file exists
