@@ -1,18 +1,16 @@
 rules:
   - id: detect-eval-usage
-    pattern: eval($CODE) 
+    pattern: eval($CODE)
     message: "Avoid using eval() as it may introduce security vulnerabilities."
     severity: ERROR
     languages: ["javascript", "typescript"]
 
-
   - id: detect-function-usage
-    patterns:
-      - pattern: someUnsafeFunction($CODE)
+    pattern: someUnsafeFunction($CODE)
     message: "Detected the use of a potentially unsafe function. Check if this function poses any security risks."
     severity: WARNING
-    languages: [javascript ,typescript]
-  
+    languages: ["javascript", "typescript"]
+
   - id: detect-hardcoded-secret
     patterns:
       - pattern: $KEY = "$SECRET"
@@ -22,86 +20,82 @@ rules:
     severity: ERROR
     languages: ["javascript", "typescript"]
 
-  
   - id: detect-insecure-endpoint
-    patterns:
-      - pattern: "http://$X"
+    pattern: "http://$X"
     message: "Detected an insecure endpoint (HTTP). It is recommended to use HTTPS instead."
     severity: ERROR
     languages: ["javascript", "typescript"]
 
-  
   - id: detect-sensitive-logging
-    patterns:
-      - pattern: console.log($CODE)
+    pattern: console.log($CODE)
     message: "Detected logging of potentially sensitive information. Ensure that the logged data is safe."
     severity: WARNING
     languages: ["javascript", "typescript"]
 
-  
   - id: detect-unsafe-regular-expressions
-    patterns:
-      - pattern: /(.+)+/
+    pattern: /(\w+){2,}/
     message: "Detected a regular expression that could lead to ReDoS (Regular Expression Denial of Service)."
     severity: WARNING
     languages: ["javascript", "typescript"]
 
-  
   - id: detect-unvalidated-input
-    patterns:
-      - pattern: req.body.$INPUT
+    pattern: req.body.$INPUT
     message: "Detected unvalidated user input, which may lead to security vulnerabilities."
     severity: WARNING
     languages: ["javascript", "typescript"]
 
-  
   - id: duplicate-code
     pattern: |
-      def $FUNC_NAME($ARGS):
+      function $FUNC_NAME($ARGS) {
           $BODY
-      def $FUNC_NAME($ARGS):
+      }
+      function $FUNC_NAME($ARGS) {
           $BODY
+      }
     message: "Duplicated function definition detected."
     severity: WARNING
-  
+    languages: ["javascript", "typescript"]
+
   - id: long-function
     pattern: |
-      def $FUNC_NAME($ARGS):
+      function $FUNC_NAME($ARGS) {
           $BODY
+      }
     message: "Function is too long. Consider refactoring."
     severity: WARNING
     max-lines: 20
-    languages: [javascript, typescript]
-  
+    languages: ["javascript", "typescript"]
+
   - id: complex-if-else
     pattern: |
-      if $COND1:
+      if ($COND1) {
           $BODY1
-      else:
-          if $COND2:
+      } else {
+          if ($COND2) {
               $BODY2
-          else:
+          } else {
               $BODY3
+          }
+      }
     message: "Complex if-else statement detected. Consider refactoring."
     severity: WARNING
     languages: ["javascript", "typescript"]
 
-  
   - id: duplicate-loop
     pattern: |
-      for $VAR in $COLLECTION:
+      for (let $VAR of $COLLECTION) {
           $BODY
-      for $VAR in $COLLECTION:
+      }
+      for (let $VAR of $COLLECTION) {
           $BODY
+      }
     message: "Duplicated loop detected. Consider refactoring."
     severity: WARNING
     languages: ["javascript", "typescript"]
 
-  
   - id: hardcoded-value
     pattern: |
-      $VAR = "secret"
+      const $VAR = "secret"
     message: "Avoid using hardcoded values in the code."
     severity: ERROR
     languages: ["javascript", "typescript"]
-
