@@ -20,35 +20,40 @@ rules:
           const $KEY = "$SECRET"
     message: "Detected hardcoded secrets (such as API keys or passwords) in the code."
     severity: ERROR
-    languages: [javascript ,typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: detect-insecure-endpoint
     patterns:
       - pattern: "http://$X"
     message: "Detected an insecure endpoint (HTTP). It is recommended to use HTTPS instead."
     severity: ERROR
-    languages: [javascript ,typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: detect-sensitive-logging
     patterns:
       - pattern: console.log($CODE)
     message: "Detected logging of potentially sensitive information. Ensure that the logged data is safe."
     severity: WARNING
-    languages: [javascript ,typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: detect-unsafe-regular-expressions
     patterns:
       - pattern: /(.+)+/
     message: "Detected a regular expression that could lead to ReDoS (Regular Expression Denial of Service)."
     severity: WARNING
-    languages: [javascript ,typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: detect-unvalidated-input
     patterns:
       - pattern: req.body.$INPUT
     message: "Detected unvalidated user input, which may lead to security vulnerabilities."
     severity: WARNING
-    languages: [javascript ,typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: duplicate-code
     pattern: |
@@ -79,7 +84,8 @@ rules:
               $BODY3
     message: "Complex if-else statement detected. Consider refactoring."
     severity: WARNING
-    languages: [javascript, typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: duplicate-loop
     pattern: |
@@ -89,11 +95,13 @@ rules:
           $BODY
     message: "Duplicated loop detected. Consider refactoring."
     severity: WARNING
-    languages: [javascript, typescript]
+    languages: ["javascript", "typescript"]
+
   
   - id: hardcoded-value
     pattern: |
       $VAR = "secret"
     message: "Avoid using hardcoded values in the code."
     severity: ERROR
-    languages: [javascript, typescript]
+    languages: ["javascript", "typescript"]
+

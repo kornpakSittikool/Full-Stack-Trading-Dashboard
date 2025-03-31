@@ -27,7 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4 
     - run: ls -al
-    - run: semgrep scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose || true
+    - run: semgrep --validate scan --config=semgrep-rules.yml --output=semgrep-results.sarif --sarif --verbose --metrics=off || true
     - name: List files to check if SARIF exists
       run: ls -al
     - name: Check if SARIF file exists
