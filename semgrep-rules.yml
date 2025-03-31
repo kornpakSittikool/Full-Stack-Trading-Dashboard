@@ -1,10 +1,10 @@
 rules:
   - id: detect-eval-usage
-    pattern:
-      - pattern: eval($CODE)
+    pattern: eval($CODE) 
     message: "Avoid using eval() as it may introduce security vulnerabilities."
     severity: ERROR
-    languages: [javascript ,typescript]
+    languages: ["javascript", "typescript"]
+
 
   - id: detect-function-usage
     patterns:
