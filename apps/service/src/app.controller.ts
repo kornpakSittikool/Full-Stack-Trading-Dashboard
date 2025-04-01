@@ -32,4 +32,10 @@ export class AppController {
   getAdminData(): string {
     return 'Admin Data';
   }
+
+  @Get('public-data')
+  getPublicData(): { message: string } {
+    // ❌ No Authentication (API เปิด public)
+    return { message: 'This is a public API, anyone can access it!' };
+  }
 }
