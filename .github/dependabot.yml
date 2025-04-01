@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # การตั้งค่าอัปเดตสำหรับ npm (JavaScript, TypeScript)
+  - package-ecosystem: "npm"
+    directory: "/"  # ที่ตั้งของ package.json (โปรเจ็คที่ใช้ npm)
+    schedule:
+      interval: "weekly"  # อัปเดตทุกสัปดาห์
+    allow:
+      - dependency-type: "direct"  # อัปเดต dependencies หลักเท่านั้น
+    ignore:
+      - dependency-name: "lodash"  # ยกเว้นการอัปเดต lodash (หากมีปัญหากับเวอร์ชันนั้น)
+
+  # การตั้งค่าอัปเดตสำหรับ GitHub Actions (JavaScript/TypeScript)
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"  # ที่ตั้งของไฟล์ workflows
+    schedule:
+      interval: "weekly"  # อัปเดตทุกสัปดาห์
+    allow:
+      - dependency-type: "direct"  # อัปเดตเฉพาะ dependencies หลัก
