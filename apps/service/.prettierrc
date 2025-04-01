@@ -4,7 +4,7 @@
   "tabWidth": 2,
   "useTabs": false,
   "trailingComma": "all",
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "_comments": {
     "semi": "บังคับให้ใช้ semicolon (;) ที่ท้ายคำสั่ง",
     "singleQuote": "ใช้ single quote (') แทน double quote (\")",

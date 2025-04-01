@@ -33,7 +33,7 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error', // ❌ ห้ามใช้ any
       '@typescript-eslint/explicit-function-return-type': 'warn', // ต้องกำหนด return type ให้ฟังก์ชัน
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }], // แสดง error ถ้ามีตัวแปรที่ไม่ได้ใช้
-      'prettier/prettier': 'error', // แจ้ง error ถ้า format ไม่ตรงกับ prettier
+      'prettier/prettier': ["error", { "endOfLine": "auto" }]
     },
   },
 );
